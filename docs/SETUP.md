@@ -2,7 +2,7 @@
 
 > **対象環境**: Windows 11 + Node.js 18+ + PostgreSQL 14+
 
-## 📋 前提条件
+## 前提条件
 
 ```bash
 # 確認コマンド
@@ -12,7 +12,7 @@ git --version
 psql --version      # PostgreSQL 14+ 
 ```
 
-## 🔧 初期セットアップ
+## 初期セットアップ
 
 ### ステップ1: PostgreSQL のセットアップ
 
@@ -116,7 +116,7 @@ NEXT_PUBLIC_APP_NAME=FixLog
 NEXT_PUBLIC_APP_VERSION=1.0.0
 ```
 
-## ▶️ 起動方法
+## 起動方法
 
 ### 方法1: 別ターミナルで起動（推奨）
 
@@ -156,7 +156,7 @@ http://localhost:3000
 docker-compose up -d
 ```
 
-## 🗄️ DB 管理コマンド
+## DB 管理コマンド
 
 ### Prisma Studio でデータを確認
 
@@ -169,7 +169,7 @@ npm run db:studio
 ### DB をリセット
 
 ```bash
-# ⚠️ 警告: すべてのデータが削除されます
+# 警告: すべてのデータが削除されます
 npm run db:reset
 ```
 
@@ -179,7 +179,7 @@ npm run db:reset
 npm run db:migrate:status
 ```
 
-## 🧪 開発ツール
+## 開発ツール
 
 ### TypeScript 型チェック
 
@@ -205,7 +205,7 @@ npm run lint
 npm test
 ```
 
-## ⚠️ トラブルシューティング
+## トラブルシューティング
 
 ### エラー: `DATABASE_URL connection refused`
 
@@ -252,7 +252,7 @@ cd ../frontend
 cp .env.example .env.local
 ```
 
-## ✅ セットアップ完了確認
+## セットアップ完了確認
 
 ```bash
 # すべてが起動できたか確認
@@ -265,4 +265,4 @@ curl http://localhost:5000/api/health
 
 ---
 
-**最終更新**: 2026年5月5日
+**最終更新**: 2026年5月7日
