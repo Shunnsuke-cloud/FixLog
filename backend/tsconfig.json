@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "moduleResolution": "Node16",
     "resolveJsonModule": true,
-    "types": []
+    "types": ["node", "express", "cors", "helmet", "morgan"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]

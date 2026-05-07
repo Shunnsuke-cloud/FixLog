@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import prisma from '../services/prisma';
@@ -6,7 +6,7 @@ import prisma from '../services/prisma';
 const router = Router();
 const jwtSecret = process.env.JWT_SECRET ?? 'dev-secret-key-do-not-use-in-production';
 
-router.post('/register', async (req, res) => {
+router.post('/register', async (req: Request, res: Response) => {
   const { email, username, password } = req.body;
   if (!email || !username || !password) return res.status(400).json({ success: false, error: 'Missing fields' });
 
@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
   res.json({ success: true, data: { token, user: { id: user.id, email: user.email, username: user.username } } });
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', async (req: Request, res: Response) => {
   const { emailOrUsername, password } = req.body;
   if (!emailOrUsername || !password) return res.status(400).json({ success: false, error: 'Missing fields' });
 

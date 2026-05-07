@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
@@ -15,7 +15,7 @@ export function createApp() {
   app.use(express.json());
   app.use(morgan('dev'));
 
-  app.get('/', (_request, response) => {
+  app.get('/', (_request: Request, response: Response) => {
     response.json({
       success: true,
       data: {
@@ -29,7 +29,7 @@ export function createApp() {
   app.use('/auth', authRouter);
   app.use('/posts', postsRouter);
 
-  app.use((_request, response) => {
+  app.use((_request: Request, response: Response) => {
     response.status(404).json({
       success: false,
       error: 'Not Found',

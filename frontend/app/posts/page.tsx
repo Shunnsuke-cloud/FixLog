@@ -1,7 +1,20 @@
 "use client";
 import { useEffect, useState } from 'react';
 
-type Post = { id:number; title:string; description:string; createdAt:string };
+type Post = {
+  id:number;
+  title:string;
+  description:string;
+  createdAt:string;
+  environment?: {
+    language?: string | null;
+    framework?: string | null;
+    os?: string | null;
+    osVersion?: string | null;
+    nodeVersion?: string | null;
+    npmVersion?: string | null;
+  } | null;
+};
 
 export default function PostsPage(){
   const [posts,setPosts]=useState<Post[]>([]);
@@ -14,6 +27,16 @@ export default function PostsPage(){
           <article key={p.id} className="rounded-xl border p-4 bg-white shadow-sm">
             <h3 className="font-semibold text-lg">{p.title}</h3>
             <p className="mt-2 text-sm text-slate-600">{p.description}</p>
+            {p.environment && (
+              <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                {p.environment.language && <span className="rounded-full bg-orange-100 px-2 py-1 text-orange-700">{p.environment.language}</span>}
+                {p.environment.framework && <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-700">{p.environment.framework}</span>}
+                {p.environment.os && <span className="rounded-full bg-blue-100 px-2 py-1 text-blue-700">{p.environment.os}</span>}
+                {p.environment.osVersion && <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-700">OS {p.environment.osVersion}</span>}
+                {p.environment.nodeVersion && <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-700">Node {p.environment.nodeVersion}</span>}
+                {p.environment.npmVersion && <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-700">npm {p.environment.npmVersion}</span>}
+              </div>
+            )}
             <div className="mt-3 text-xs text-slate-400">作成日: {new Date(p.createdAt).toLocaleString()}</div>
           </article>
         ))}
