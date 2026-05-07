@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import { useAuth } from '../../../src/lib/AuthProvider';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -7,15 +8,23 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState<string | null>(null);
 
+  const { login } = useAuth();
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!email || !username || !password) { setMessage('入力してください'); return; }
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, username, password }),
     });
     const data = await res.json();
-    if (data?.success) setMessage('登録成功'); else setMessage(data?.error ?? '登録失敗');
+    if (data?.success) {
+      setMessage('登録成功');
+      if (data.data?.token && data.data?.user) login(data.data.token, data.data.user);
+    } else {
+      setMessage(data?.error ?? '登録失敗');
+    }
   }
 
   return (

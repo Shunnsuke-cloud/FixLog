@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { AuthProvider } from '../src/lib/AuthProvider';
+import HeaderNav from '../src/components/HeaderNav';
 
 export const metadata: Metadata = {
   title: 'FixLog',
@@ -13,7 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body>
+        <AuthProvider>
+          <HeaderNav />
+          <main className="container py-8">{children}</main>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

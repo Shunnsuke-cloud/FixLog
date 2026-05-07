@@ -30,3 +30,21 @@ a {
 ::selection {
   background: rgba(249, 115, 22, 0.2);
 }
+
+/* Reusable form controls */
+.input {
+  @apply w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800;
+}
+
+.input:focus {
+  @apply outline-none ring-2 ring-orange-200 border-orange-300;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-md bg-orange-500 text-white px-4 py-2 text-sm font-semibold hover:bg-orange-600;
+}
+
+.container {
+  @apply mx-auto max-w-4xl px-6;
+}
+
