@@ -127,52 +127,31 @@ Authorization: Bearer <JWT_TOKEN>
 
 ### GET /posts - 投稿一覧取得
 
-クエリパラメータ:
-
-| パラメータ | 型 | 説明 |
-|------------|-----|------|
-| `page` | Int | ページ番号（デフォルト: 1） |
-| `limit` | Int | 1ページあたりの件数（デフォルト: 20） |
-| `tag` | String | タグでフィルター |
-| `sort` | String | 並び順（`latest`, `popular`） |
-
-リクエスト例:
-
-```
-GET /posts?page=1&limit=20&sort=latest
-```
-
 レスポンス (200):
 
 ```json
 {
   "success": true,
-  "data": {
-    "posts": [
-      {
+  "data": [
+    {
+      "id": 1,
+      "title": "TypeError: Cannot read property 'name' of undefined",
+      "description": "オブジェクトがnullの時にプロパティを読み込もうとした...",
+      "solution": "null チェックを追加する必要があります...",
+      "user": {
         "id": 1,
-        "title": "TypeError: Cannot read property 'name' of undefined",
-        "description": "オブジェクトがnullの時にプロパティを読み込もうとした...",
-        "solution": "null チェックを追加する必要があります...",
-        "user": {
-          "id": 1,
-          "username": "developer"
-        },
-        "environment": {
-          "language": "JavaScript",
-          "framework": "React",
-          "os": "Windows",
-          "osVersion": "11"
-        },
-        "comments": 5,
-        "successRate": 85.5,
-        "createdAt": "2026-05-04T15:30:00Z"
-      }
-    ],
-    "total": 100,
-    "page": 1,
-    "totalPages": 5
-  }
+        "username": "developer"
+      },
+      "environment": {
+        "language": "JavaScript",
+        "framework": "React",
+        "os": "Windows",
+        "osVersion": "11"
+      },
+      "comments": 5,
+      "createdAt": "2026-05-04T15:30:00Z"
+    }
+  ]
 }
 ```
 
@@ -196,8 +175,7 @@ GET /posts?page=1&limit=20&sort=latest
     "osVersion": "11",
     "nodeVersion": "18.0.0",
     "npmVersion": "9.0.0"
-  },
-  "tags": ["React", "TypeError", "Frontend"]
+  }
 }
 ```
 
@@ -244,10 +222,6 @@ GET /posts?page=1&limit=20&sort=latest
       "os": "Windows",
       "osVersion": "11"
     },
-    "tags": [
-      { "id": 1, "name": "React" },
-      { "id": 2, "name": "TypeError" }
-    ],
     "comments": [
       {
         "id": 10,
@@ -258,11 +232,6 @@ GET /posts?page=1&limit=20&sort=latest
         "createdAt": "2026-05-05T11:00:00Z"
       }
     ],
-    "solutionFeedback": {
-      "totalFeedback": 20,
-      "solvedCount": 17,
-      "successRate": 85
-    },
     "createdAt": "2026-05-04T15:30:00Z",
     "updatedAt": "2026-05-05T09:00:00Z"
   }
@@ -281,8 +250,7 @@ GET /posts?page=1&limit=20&sort=latest
 {
   "title": "更新されたタイトル",
   "description": "更新された説明",
-  "solution": "更新された解決方法",
-  "tags": ["React", "Bug"]
+  "solution": "更新された解決方法"
 }
 ```
 
