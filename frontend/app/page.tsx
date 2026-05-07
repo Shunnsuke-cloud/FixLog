@@ -3,21 +3,12 @@ const highlights = [
     title: '環境情報付き投稿',
     description: '言語・フレームワーク・OS・バージョンをまとめて記録し、再現性を高めます。',
   },
-  {
-    title: '解決率スコア',
-    description: '解決できた件数を可視化し、信頼できる投稿を判断しやすくします。',
-  },
-  {
-    title: 'チーム共有',
-    description: 'コメントとタグで、同じエラーの知見をチーム内で蓄積できます。',
-  },
 ];
 
 const steps = [
   'エラーを投稿する',
   '環境情報を記録する',
   '解決方法を共有する',
-  '解決率で信頼性を確認する',
 ];
 
 export default function HomePage() {
@@ -67,16 +58,12 @@ export default function HomePage() {
                   <p className="text-slate-400">Framework</p>
                   <p className="font-semibold">Next.js</p>
                 </div>
-                <div className="rounded-2xl bg-white/10 p-3">
-                  <p className="text-slate-400">Success Rate</p>
-                  <p className="font-semibold">85%</p>
-                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div id="highlights" className="mt-16 grid gap-4 md:grid-cols-3">
+        <div id="highlights" className="mt-16 grid gap-4 md:grid-cols-1">
           {highlights.map((item) => (
             <article key={item.title} className="rounded-3xl border border-orange-100 bg-white/90 p-6 shadow-sm">
               <h2 className="text-lg font-bold text-slate-950">{item.title}</h2>
@@ -87,7 +74,7 @@ export default function HomePage() {
 
         <section id="flow" className="mt-10 rounded-[2rem] border border-slate-200 bg-white/85 p-6 shadow-sm backdrop-blur">
           <h2 className="text-lg font-bold text-slate-950">開発フロー</h2>
-          <div className="mt-5 grid gap-3 md:grid-cols-4">
+          <div className="mt-5 grid gap-3 md:grid-cols-3">
             {steps.map((step, index) => (
               <div key={step} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-orange-500">0{index + 1}</p>

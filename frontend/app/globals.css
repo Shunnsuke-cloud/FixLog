@@ -41,7 +41,19 @@ a {
 }
 
 .btn {
-  @apply inline-flex items-center justify-center rounded-md bg-orange-500 text-white px-4 py-2 text-sm font-semibold hover:bg-orange-600;
+  @apply inline-flex items-center justify-center rounded-md bg-orange-500 text-white px-4 py-2 text-sm font-semibold hover:bg-orange-600 transition;
+}
+
+.btn-primary {
+  @apply bg-orange-500 text-white hover:bg-orange-600;
+}
+
+.btn-secondary {
+  @apply bg-slate-200 text-slate-900 hover:bg-slate-300;
+}
+
+.btn-outline {
+  @apply border border-slate-300 bg-white text-slate-900 hover:border-orange-400 hover:bg-orange-50 transition;
 }
 
 .container {
