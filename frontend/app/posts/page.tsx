@@ -21,11 +21,16 @@ export default function PostsPage(){
   const [posts,setPosts]=useState<Post[]>([]);
   useEffect(()=>{fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`).then(r=>r.json()).then(d=>{if(d?.success) setPosts(d.data);});},[]);
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-bold mb-4">投稿一覧</h1>
+    <main className="container p-6">
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-3xl font-bold">投稿一覧</h1>
+        <Link href="/posts/new" className="btn btn-primary">
+          新規投稿を作成
+        </Link>
+      </div>
       <div className="grid gap-4 md:grid-cols-2">
         {posts.map((p) => (
-          <article key={p.id} className="rounded-xl border p-4 bg-white shadow-sm">
+          <article key={p.id} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md transition">
             <h3 className="font-semibold text-lg">
               <Link href={`/posts/${p.id}`} className="hover:text-orange-600">
                 {p.title}
@@ -43,8 +48,8 @@ export default function PostsPage(){
               </div>
             )}
             <div className="mt-3 text-xs text-slate-400">作成日: {new Date(p.createdAt).toLocaleString()}</div>
-            <div className="mt-3">
-              <Link href={`/posts/${p.id}`} className="text-sm font-semibold text-orange-600 hover:text-orange-700">
+            <div className="mt-4">
+              <Link href={`/posts/${p.id}`} className="btn btn-outline">
                 詳細を見る
               </Link>
             </div>
