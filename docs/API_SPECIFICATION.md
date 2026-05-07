@@ -2,7 +2,7 @@
 
 > Base URL: `http://localhost:5000/api`
 
-## 📌 共通ルール
+## 共通ルール
 
 ### レスポンスフォーマット
 
@@ -37,7 +37,7 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-## 🔐 認証 API
+## 認証 API
 
 ### POST /auth/register - ユーザー登録
 
@@ -123,7 +123,7 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-## 📝 投稿 API
+## 投稿 API
 
 ### GET /posts - 投稿一覧取得
 
@@ -319,7 +319,7 @@ GET /posts?page=1&limit=20&sort=latest
 
 ---
 
-## 💬 コメント API
+## コメント API
 
 ### POST /posts/:id/comments - コメント作成
 
@@ -400,7 +400,7 @@ GET /posts?page=1&limit=20&sort=latest
 
 ---
 
-## 🎯 解決率 API
+## 解決率 API
 
 ### POST /posts/:id/feedback - 解決率を投票
 
@@ -450,7 +450,7 @@ GET /posts?page=1&limit=20&sort=latest
 
 ---
 
-## 🏷️ タグ API
+## タグ API
 
 ### GET /tags - タグ一覧取得
 
@@ -473,7 +473,7 @@ GET /posts?page=1&limit=20&sort=latest
 
 ---
 
-## ❌ エラーコード
+## エラーコード
 
 | コード | HTTP | 説明 |
 |--------|------|------|
@@ -488,7 +488,7 @@ GET /posts?page=1&limit=20&sort=latest
 
 ---
 
-## 🔍 使用例（curl）
+## 使用例（curl）
 
 ### ユーザー登録
 
@@ -543,4 +543,4 @@ curl -X POST http://localhost:5000/api/posts \
 
 ---
 
-**最終更新**: 2026年5月5日
+**最終更新**: 2026年5月7日

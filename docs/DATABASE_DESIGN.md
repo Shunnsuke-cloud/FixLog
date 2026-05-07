@@ -2,7 +2,7 @@
 
 > Prisma ORM + PostgreSQL
 
-## 🗄️ テーブル設計
+## テーブル設計
 
 ### 1. `users` - ユーザー
 
@@ -202,7 +202,7 @@ model SolutionFeedback {
 
 ---
 
-## 📊 リレーション図
+## リレーション図
 
 ```
 ┌─────────────────┐
@@ -237,7 +237,7 @@ model SolutionFeedback {
 
 ---
 
-## 🔄 データフロー例
+## データフロー例
 
 ### 例1: エラー投稿から解決率を計算
 
@@ -270,7 +270,7 @@ ORDER BY p.created_at DESC;
 
 ---
 
-## 📝 Prisma Schema（実装版）
+## Prisma Schema（実装版）
 
 ```prisma
 // prisma/schema.prisma
@@ -383,4 +383,4 @@ model SolutionFeedback {
 
 ---
 
-**最終更新**: 2026年5月5日
+**最終更新**: 2026年5月7日

@@ -2,7 +2,7 @@
 
 > **重要**: 本ドキュメントに従って段階的に開発を進めます。エラーを最小限にするため、各ステップを丁寧に実行してください。
 
-## 📋 開発ルール
+## 開発ルール
 
 ### ブランチ戦略（Git Flow）
 
@@ -43,7 +43,7 @@ fix: ログインエラーを修正
 docs: APIドキュメントを更新
 ```
 
-## 🚀 開発の進め方
+## 開発の進め方
 
 ### 1. 初期セットアップ（1回目のみ）
 
@@ -104,7 +104,7 @@ git checkout develop
 git merge --no-ff release/v1.0.0
 ```
 
-## 📁 フロントエンド開発
+## フロントエンド開発
 
 ### セットアップ
 
@@ -174,7 +174,7 @@ npm run type-check
 npm run lint
 ```
 
-## 🔧 バックエンド開発
+## バックエンド開発
 
 ### セットアップ
 
@@ -259,7 +259,7 @@ npm run db:migrate -- --name 説明
 npm run db:studio
 ```
 
-## 🔗 API 通信フロー
+## API 通信フロー
 
 ```
 フロントエンド（Next.js）
@@ -271,7 +271,7 @@ API ルート (frontend/app/api/*)
 PostgreSQL DB
 ```
 
-## ⚠️ 開発中の注意点
+## 開発中の注意点
 
 ### 1. 環境変数管理
 
@@ -312,7 +312,7 @@ CREATE DATABASE fixlog;
 - [ ] 新しい API の場合、Swagger ドキュメント更新した
 - [ ] DB スキーマ変更した場合、マイグレーション作成した
 
-## 📚 参考リソース
+## 参考リソース
 
 - [Next.js 公式ドキュメント](https://nextjs.org/docs)
 - [Prisma ORM](https://www.prisma.io/docs/)
@@ -321,4 +321,4 @@ CREATE DATABASE fixlog;
 
 ---
 
-**最終更新**: 2026年5月5日
+**最終更新**: 2026年5月7日
