@@ -1,10 +1,20 @@
 "use client";
 import { useState } from 'react';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../../../src/lib/AuthProvider';
+
 export default function NewPostPage(){
   const [title,setTitle]=useState('');
   const [description,setDescription]=useState('');
   const [message,setMessage]=useState<string | null>(null);
+  const { token } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!token) router.push('/auth/login');
+  }, [token, router]);
 
   async function handleSubmit(e:React.FormEvent){
     e.preventDefault();

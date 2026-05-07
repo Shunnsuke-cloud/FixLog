@@ -1,21 +1,26 @@
 "use client";
 import { useState } from 'react';
+import { useAuth } from '../../../src/lib/AuthProvider';
+
 
 export default function LoginPage() {
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState<string | null>(null);
 
+  const { login } = useAuth();
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!emailOrUsername || !password) { setMessage('入力してください'); return; }
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ emailOrUsername, password }),
     });
     const data = await res.json();
-    if (data?.success && data.data?.token) {
-      localStorage.setItem('token', data.data.token);
+    if (data?.success && data.data?.token && data.data?.user) {
+      login(data.data.token, data.data.user);
       setMessage('ログイン成功');
     } else {
       setMessage(data?.error ?? 'ログイン失敗');

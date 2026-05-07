@@ -9,14 +9,15 @@ export default function PostsPage(){
   return (
     <main className="p-6">
       <h1 className="text-2xl font-bold mb-4">投稿一覧</h1>
-      <ul className="space-y-3">
-        {posts.map(p=> (
-          <li key={p.id} className="border p-3 rounded"> 
-            <h3 className="font-semibold">{p.title}</h3>
-            <p className="text-sm text-slate-600">{p.description}</p>
-          </li>
+      <div className="grid gap-4 md:grid-cols-2">
+        {posts.map((p) => (
+          <article key={p.id} className="rounded-xl border p-4 bg-white shadow-sm">
+            <h3 className="font-semibold text-lg">{p.title}</h3>
+            <p className="mt-2 text-sm text-slate-600">{p.description}</p>
+            <div className="mt-3 text-xs text-slate-400">作成日: {new Date(p.createdAt).toLocaleString()}</div>
+          </article>
         ))}
-      </ul>
+      </div>
     </main>
   );
 }
