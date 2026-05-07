@@ -1,7 +1,5 @@
 "use client";
-import { useState } from 'react';
-
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../../src/lib/AuthProvider';
 
@@ -9,21 +7,32 @@ export default function NewPostPage(){
   const [title,setTitle]=useState('');
   const [description,setDescription]=useState('');
   const [message,setMessage]=useState<string | null>(null);
-  const { token } = useAuth();
+  const { token, authReady } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!token) router.push('/auth/login');
-  }, [token, router]);
+    if (authReady && !token) router.push('/auth/login');
+  }, [authReady, token, router]);
 
   async function handleSubmit(e:React.FormEvent){
     e.preventDefault();
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    if (!token) {
+      setMessage('ログインが必要です');
+      return;
+    }
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`,{
       method:'POST',headers:{'Content-Type':'application/json','Authorization': token?`Bearer ${token}`:''},body:JSON.stringify({title,description})
     });
     const data = await res.json();
     if(data?.success) setMessage('投稿しました'); else setMessage(data?.error ?? '投稿に失敗しました');
+  }
+
+  if (!authReady) {
+    return (
+      <main className="p-6">
+        <p className="text-sm text-slate-600">認証情報を確認しています...</p>
+      </main>
+    );
   }
 
   return (

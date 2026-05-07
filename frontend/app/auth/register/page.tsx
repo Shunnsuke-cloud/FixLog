@@ -1,18 +1,28 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../../src/lib/AuthProvider';
+import Toast from '../../../src/components/Toast';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ message: string; variant: 'success' | 'error' } | null>(null);
 
   const { login } = useAuth();
 
+  useEffect(() => {
+    if (!toast) return;
+    const timer = setTimeout(() => setToast(null), 2000);
+    return () => clearTimeout(timer);
+  }, [toast]);
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email || !username || !password) { setMessage('入力してください'); return; }
+    if (!email || !username || !password) {
+      setToast({ message: '入力してください', variant: 'error' });
+      return;
+    }
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -20,10 +30,14 @@ export default function RegisterPage() {
     });
     const data = await res.json();
     if (data?.success) {
-      setMessage('登録成功');
-      if (data.data?.token && data.data?.user) login(data.data.token, data.data.user);
+      setToast({ message: '登録成功。投稿一覧へ移動します...', variant: 'success' });
+      if (data.data?.token && data.data?.user) {
+        setTimeout(() => {
+          login(data.data.token, data.data.user, '/posts');
+        }, 600);
+      }
     } else {
-      setMessage(data?.error ?? '登録失敗');
+      setToast({ message: data?.error ?? '登録失敗', variant: 'error' });
     }
   }
 
@@ -35,8 +49,8 @@ export default function RegisterPage() {
         <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="ユーザー名" className="input" />
         <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="パスワード" className="input" />
         <button className="btn">登録</button>
-        {message && <p>{message}</p>}
       </form>
+      {toast && <Toast message={toast.message} variant={toast.variant} onClose={() => setToast(null)} />}
     </main>
   );
 }

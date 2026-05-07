@@ -11,7 +11,8 @@ type AuthUser = {
 type AuthContextType = {
   token: string | null;
   user: AuthUser | null;
-  login: (token: string, user: AuthUser) => void;
+  authReady: boolean;
+  login: (token: string, user: AuthUser, redirectPath?: string) => void;
   logout: () => void;
 };
 
@@ -20,6 +21,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<AuthUser | null>(null);
+  const [authReady, setAuthReady] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -33,14 +35,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.removeItem('user');
       }
     }
+    setAuthReady(true);
   }, []);
 
-  function login(t: string, nextUser: AuthUser) {
+  function login(t: string, nextUser: AuthUser, redirectPath = '/') {
     localStorage.setItem('token', t);
     localStorage.setItem('user', JSON.stringify(nextUser));
     setToken(t);
     setUser(nextUser);
-    router.push('/');
+    router.push(redirectPath);
   }
 
   function logout() {
@@ -51,7 +54,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     router.push('/');
   }
 
-  return <AuthContext.Provider value={{ token, user, login, logout }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ token, user, authReady, login, logout }}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {
