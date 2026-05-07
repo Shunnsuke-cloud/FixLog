@@ -1,11 +1,13 @@
 import cors from 'cors';
-import express, { Request, Response } from 'express';
+import express from 'express';
+import type { Request, Response } from 'express-serve-static-core';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
 import healthRouter from './routes/health';
 import authRouter from './routes/auth';
 import postsRouter from './routes/posts';
+import usersRouter from './routes/users';
 
 export function createApp() {
   const app = express();
@@ -28,6 +30,7 @@ export function createApp() {
   app.use('/health', healthRouter);
   app.use('/auth', authRouter);
   app.use('/posts', postsRouter);
+  app.use('/users', usersRouter);
 
   app.use((_request: Request, response: Response) => {
     response.status(404).json({
