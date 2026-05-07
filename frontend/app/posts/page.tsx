@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 type Post = {
   id:number;
@@ -25,7 +26,11 @@ export default function PostsPage(){
       <div className="grid gap-4 md:grid-cols-2">
         {posts.map((p) => (
           <article key={p.id} className="rounded-xl border p-4 bg-white shadow-sm">
-            <h3 className="font-semibold text-lg">{p.title}</h3>
+            <h3 className="font-semibold text-lg">
+              <Link href={`/posts/${p.id}`} className="hover:text-orange-600">
+                {p.title}
+              </Link>
+            </h3>
             <p className="mt-2 text-sm text-slate-600">{p.description}</p>
             {p.environment && (
               <div className="mt-3 flex flex-wrap gap-2 text-xs">
@@ -38,6 +43,11 @@ export default function PostsPage(){
               </div>
             )}
             <div className="mt-3 text-xs text-slate-400">作成日: {new Date(p.createdAt).toLocaleString()}</div>
+            <div className="mt-3">
+              <Link href={`/posts/${p.id}`} className="text-sm font-semibold text-orange-600 hover:text-orange-700">
+                詳細を見る
+              </Link>
+            </div>
           </article>
         ))}
       </div>
